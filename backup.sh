@@ -1,13 +1,15 @@
 #!/bin/bash
 
+# Change the current working directory to the script's directory
+cd "$(dirname "$0")"
+
 # Load environment variables from .env file in the script's directory
-if [[ -f "$(dirname "$0")/.env" ]]; then
-    source "$(dirname "$0")/.env"
+if [[ -f .env ]]; then
+    source .env
 else
     echo "Error: .env file not found."
     exit 1
 fi
-
 # Get current timestamp in the desired format
 timestamp=$(date "+%H-%M-%S")
 
