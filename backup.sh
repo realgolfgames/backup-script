@@ -23,3 +23,11 @@ mkdir -p "backups/${year}/${month}/${day}"
 
 # Run mongoexport command with timestamp in the output file name and store in the organized folder
 mongoexport --uri "${MONGODB_URI}" --collection users --type JSON --out "backups/${year}/${month}/${day}/${timestamp}.json"
+
+# Wait for the export to complete
+while pgrep -f "mongoexport" >/dev/null; do
+    sleep 1
+done
+
+# Use killall to terminate the Terminal application
+killall Terminal
