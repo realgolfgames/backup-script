@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Load environment variables from .env file
-if [[ -f .env ]]; then
-    source .env
+# Load environment variables from .env file in the script's directory
+if [[ -f "$(dirname "$0")/.env" ]]; then
+    source "$(dirname "$0")/.env"
 else
     echo "Error: .env file not found."
     exit 1
