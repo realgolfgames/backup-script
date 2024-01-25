@@ -29,5 +29,5 @@ while pgrep -f "mongoexport" >/dev/null; do
     sleep 1
 done
 
-# Use killall to terminate the Terminal application
-killall Terminal
+# # Use killall to terminate the Terminal application
+# killall Terminal

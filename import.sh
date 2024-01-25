@@ -20,12 +20,12 @@ if [ ! -f "$backup_file_path" ]; then
 fi
 
 # Run mongoimport command with the specified file path
-mongoimport --uri "${MONGODB_URI}" --collection users --type JSON --file "$backup_file_path"
+mongoimport --uri "${MONGODB_URI}" --collection users --type JSON --file "$backup_file_path" --mode merge
 
 # Wait for the export to complete
 while pgrep -f "mongoexport" >/dev/null; do
     sleep 1
 done
 
-# Use killall to terminate the Terminal application
-killall Terminal
+# # Use killall to terminate the Terminal application
+# killall Terminal
