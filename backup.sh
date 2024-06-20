@@ -20,14 +20,14 @@ month=$(date "+%m")
 day=$(date "+%d")
 
 # Ensure the folders exist, create them if not
-mkdir -p "../backup/ac-onr5u54-shard-00"
-mkdir -p "../backup/ac-tl1blv7-shard-00"
+mkdir -p "../backup/users"
+mkdir -p "../backup/courses"
 
 # Run mongoexport command with timestamp in the output file name and store in the organized folder
-mongoexport --uri="${MONGODB_URI_USERS}" --collection="users" --type="JSON" --out="../backup/ac-onr5u54-shard-00/${year}-${month}-${day}_${timestamp}.import.json"
-mongoexport --uri="${MONGODB_URI_USERS}" --collection="users" --type="JSON" --out="../backup/ac-onr5u54-shard-00/${year}-${month}-${day}_${timestamp}.readable.json" --pretty
-mongoexport --uri="${MONGODB_URI_COURSES}" --collection="courses" --type="JSON" --out="../backup/ac-tl1blv7-shard-00/${year}-${month}-${day}_${timestamp}.import.json"
-mongoexport --uri="${MONGODB_URI_COURSES}" --collection="courses" --type="JSON" --out="../backup/ac-tl1blv7-shard-00/${year}-${month}-${day}_${timestamp}.readable.json" --pretty
+mongoexport --uri="${SECRET_MONGODB_CONNECTION}" --collection="users" --type="JSON" --out="../backup/users/${year}-${month}-${day}_${timestamp}.import.json"
+mongoexport --uri="${SECRET_MONGODB_CONNECTION}" --collection="users" --type="JSON" --out="../backup/users/${year}-${month}-${day}_${timestamp}.readable.json" --pretty
+mongoexport --uri="${SECRET_MONGODB_CONNECTION}" --collection="courses" --type="JSON" --out="../backup/courses/${year}-${month}-${day}_${timestamp}.import.json"
+mongoexport --uri="${SECRET_MONGODB_CONNECTION}" --collection="courses" --type="JSON" --out="../backup/courses/${year}-${month}-${day}_${timestamp}.readable.json" --pretty
 
 # Wait for the export to complete
 while pgrep -f "mongoexport" >/dev/null; do
