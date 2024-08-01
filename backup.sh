@@ -28,11 +28,13 @@ mkdir -p "../backup/quizles"
 users_backup_dir="$(cd ../backup/users && pwd)"
 courses_backup_dir="$(cd ../backup/courses && pwd)"
 quizles_backup_dir="$(cd ../backup/quizles && pwd)"
+blog_backup_dir="$(cd ../backup/blogs && pwd)"
 
 # Debug output for directories
 echo "Users backup directory: ${users_backup_dir}"
 echo "Courses backup directory: ${courses_backup_dir}"
 echo "Quizles backup directory: ${quizles_backup_dir}"
+echo "Blog backup directory: ${blog_backup_dir}"
 
 # Run mongoexport command with timestamp in the output file name and store in the organized folder
 mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="users" --type="JSON" --out="${users_backup_dir}/${year}/${month}/${day}/${timestamp}.import.json"
@@ -41,6 +43,8 @@ mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr
 mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="quizles" --type="JSON" --out="${quizles_backup_dir}/${year}/${month}/${day}/${timestamp}.readable.json" --pretty
 mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="courses" --type="JSON" --out="${courses_backup_dir}/${year}/${month}/${day}/${timestamp}.import.json"
 mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="courses" --type="JSON" --out="${courses_backup_dir}/${year}/${month}/${day}/${timestamp}.readable.json" --pretty
+mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="blogs" --type="JSON" --out="${blog_backup_dir}/${year}/${month}/${day}/${timestamp}.import.json"
+mongoexport --uri="mongodb+srv://moinjulian:${MONGODB_PASSWORD}@cluster0.w2umjjr.mongodb.net/prod?retryWrites=true&w=majority&appName=Cluster0" --collection="blogs" --type="JSON" --out="${blog_backup_dir}/${year}/${month}/${day}/${timestamp}.readable.json" --pretty
 
 # Wait for the export to complete
 while pgrep -f "mongoexport" >/dev/null; do
